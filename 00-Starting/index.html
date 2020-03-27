@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      .color-red{
+        color: red;
+      }
+      .is-loading{
+        background: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <input type="text" id="input" v-model="message" />
+      <p>The value of the input is: {{message}}</p>
+      <hr />
+      <!-- -->
+      <ul>
+        <li v-for="name in names" v-text="name"><!-- {{name}}--></li>
+      </ul>
+      <input type="text" v-model="newName" @keyUp="addName" /> <!-- SHORTHAND: @keyUp="addName" -->
+      <button v-on:click="addName">add name</button>
+      <hr />
+      <!--  -->
+      <button v-bind:title="title">Hover over me !</button> <!-- SHORTHAND: :title="title" -->
+      <h1 :class="className">Hello Red</h1>
+      <button :class="{'is-loading': isLoading}" @click="switchColor">Click me</button>
+      <button v-bind:disabled="isDisabled" @click="disableBtn">Disable me</button>
+      <hr>
+      <!--  -->
+      <h1>
+        {{reversedMessage}}
+      </h1>
+      <h2>All tasks</h2>
+      <ul>
+        <li v-for="(task, key) in tasks" v-text="task.description" @click="toggleComplete(key)"></li>
+      </ul>
+      <h2>Incomplete tasks</h2>
+      <ul>
+        <li v-for="task in incompleteTasks" v-text="task.description"></li>
+      </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: root,
+        data: {
+          message: "hello world",
+          names: ["joe", "jen", "jacques", "paul"],
+          newName: "",
+          title: "now the title is being set thru JS",
+          className: "color-red",
+          isLoading: undefined,
+          isDisabled: false,
+          tasks: [{description: "go to store", completed: true},
+                  {description: "buy a drink", completed: false},
+                  {description: "pay the bill", completed: false},
+                  {description: "go home", completed: false}]
+        },
+        methods: {
+          addName() {
+            this.names.push(this.newName);
+            this.newName = "";
+          },
+          switchColor(){
+            this.isLoading = !this.isLoading
+          },
+          disableBtn(){
+            this.isDisabled = true
+            console.log(this.isDisabled)
+          },
+          toggleComplete(key) {
+            this.tasks[key].completed = !this.tasks[key].completed;
+        }
+        },
+        computed:{ //computed property
+          reversedMessage(){
+            return this.message.split("").reverse().join('');
+          },
+          incompleteTasks(){
+            return this.tasks.filter(task => !task.completed)
+          }
+        } 
+      });
+    </script>
+  </body>
+</html>

@@ -5,3 +5,4 @@
 2.  Les composants (Modal avec bulma)
 3.  Les composants (Tabs)
 4.  Monster Slayer
+5.  Life Cycles

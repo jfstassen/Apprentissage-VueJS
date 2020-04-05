@@ -6,3 +6,5 @@
 3.  Les composants (Tabs)
 4.  Monster Slayer
 5.  Life Cycles
+6.  First CLI app
+7.  passing props: custom event and callback methods

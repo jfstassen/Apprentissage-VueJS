@@ -8,3 +8,4 @@
 5.  Life Cycles
 6.  First CLI app
 7.  passing props: custom event and callback methods
+8.  Event Bus: A third, centralized method

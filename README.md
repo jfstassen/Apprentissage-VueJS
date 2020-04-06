@@ -10,3 +10,4 @@
 7.  passing props: custom event and callback methods
 8.  Event Bus: A third, centralized method
 9.  The slot attribute // component tag & keep-alive tag // first look at lifecycle methods (destroy, activated, deactived)
+10. Exercice on slot, dynamic components

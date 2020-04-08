@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <Header :quoteCount="quotes.length" :maxQuotes="maxQuotes"></Header>
     <!-- Listen to QuoteAdded and execute NewQuotefn -->
     <NewQuote @quoteAdded="newQuoteFn"></NewQuote>
     <QuoteGrid :quotes="quotes" @quoteDeleted="deleteQuoteFn"></QuoteGrid>
@@ -14,6 +15,7 @@
 <script>
 import QuoteGrid from "./components/QuoteGrid";
 import NewQuote from "./components/NewQuote";
+import Header from "./components/Header";
 
 export default {
   data: () => ({
@@ -22,16 +24,20 @@ export default {
   }),
   components: {
     QuoteGrid,
-    NewQuote
+    NewQuote,
+    Header
   },
   methods: {
     newQuoteFn(quote) {
+      this.quotes.length >= this.maxQuotes &&
+        alert("you can't add more quote, delete some first");
       this.quotes = [quote, ...this.quotes];
+
       // this.quotes.push(quote);
     },
     deleteQuoteFn(index) {
       // this.quotes.splice(index, 1);
-      this.quotes = this.quotes.filter((item, i) => i !== index)
+      this.quotes = this.quotes.filter((item, i) => i !== index);
     }
   }
 };

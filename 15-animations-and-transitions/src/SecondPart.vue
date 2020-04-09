@@ -34,9 +34,10 @@
       @leave="leave"
       @after-leave="afterLeave"
       @leave-cancelled="leaveCancelled"
-      :css="false" 
-     ><!-- css false => don't look for css classes -->
-      <div style="width: 100px; height: 100px; background-color: lightgreen" v-if="load"></div>
+      :css="false"
+    >
+      <!-- css false => don't look for css classes -->
+      <div style="width: 300px; height: 100px; background-color: lightgreen" v-if="load"></div>
     </transition>
   </div>
 </template>
@@ -48,17 +49,28 @@ export default {
       show: true,
       alertAnimation: "fade",
       // JS ANIM
-      load: true
+      load: true,
+      elementWidth: 100
     };
   },
   // JS ANIM
   methods: {
     beforeEnter(el) {
       console.log("beforeEnter ", el);
+      this.elementWidth = 100;
+      el.style.width = this.elementWidth + "px";
     },
     enter(el, done) {
       console.log("enter ", el);
-      done(); // needed to tell vue when animation finishes (no need to use done on css animations because it knows when it finished)
+      let round = 1;
+      const interval = setInterval(() => {
+        el.style.width = this.elementWidth + round * 10 + "px";
+        round++;
+        if (round > 20) {
+          clearInterval(interval);
+          done(); // needed to tell vue when animation finishes (no need to use done on css animations because it knows when it finished)
+        }
+      }, 20);
     },
     afterEnter(el) {
       console.log("afterEnter ", el);
@@ -67,11 +79,21 @@ export default {
       console.log("enterCancelled ", el);
     },
     beforeLeave(el) {
+      this.elementWidth = 300;
       console.log("beforeLeave ", el);
+      el.style.width = this.elementWidth + "px";
     },
     leave(el, done) {
       console.log("leave ", el);
-      done(); // needed to tell vue when animation finishes (no need to use done on css animations because it knows when it finished)
+      let round = 1;
+      const interval = setInterval(() => {
+        el.style.width = this.elementWidth - round * 10 + "px";
+        round++;
+        if (round > 20) {
+          clearInterval(interval);
+          done(); // needed to tell vue when animation finishes (no need to use done on css animations because it knows when it finished)
+        }
+      }, 20);
     },
     afterLeave(el) {
       console.log("afterLeave ", el);

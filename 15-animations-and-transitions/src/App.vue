@@ -3,7 +3,8 @@
     <div class="row">
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <h1>Animations</h1>
-        <hr />
+        <h3>CSS - Premiere Partie</h3>
+        <br />
         <select v-model="alertAnimation" class="form-control">
           <option value="fade">Fade</option>
           <option value="slide">Slide + Fade</option>
@@ -34,16 +35,21 @@
         </transition>
       </div>
     </div>
+    <SecondPart></SecondPart>
   </div>
 </template>
 
 <script>
+import SecondPart from './SecondPart.vue';
 export default {
   data() {
     return {
       show: true,
       alertAnimation: "fade"
     };
+  },
+  components:{
+    SecondPart
   }
 };
 </script>

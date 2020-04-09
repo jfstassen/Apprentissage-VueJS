@@ -7,6 +7,11 @@ Vue.filter("to-lowercase", (value) => {
   return value.toLowerCase();
 });
 
+Vue.mixin({
+  created(){
+    console.log("global mixin - created hook")
+  }
+})
 new Vue({
   render: (h) => h(App),
 }).$mount("#app");

@@ -15,3 +15,4 @@
 12. Forms in VueJs
 13. Directives & creating custom directives
 14. Global & Local Filters || Use a computed property instead of a filter || Global & local mixins (tldr: use local mixins)
+15. Animations & transitions

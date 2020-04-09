@@ -22,7 +22,7 @@
     <hr />
     <!--//// ANIMATION EN JS //// -->
     <h3>JS - Animations</h3>
-    <button class="btn-primary" @click="load = !load">Load / Remove Element</button>
+    <button class="btn btn-primary" @click="load = !load">Load / Remove Element</button>
     <br />
     <br />
     <transition
@@ -34,7 +34,8 @@
       @leave="leave"
       @after-leave="afterLeave"
       @leave-cancelled="leaveCancelled"
-    >
+      :css="false" 
+     ><!-- css false => don't look for css classes -->
       <div style="width: 100px; height: 100px; background-color: lightgreen" v-if="load"></div>
     </transition>
   </div>

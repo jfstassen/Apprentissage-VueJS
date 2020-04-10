@@ -36,7 +36,7 @@
       </div>
     </div>
     <SecondPart></SecondPart>
-    <!-- Animation on dynamic components: -->
+    <!-- Part 3 => Animation on dynamic components: -->
     <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
       <hr />
       <button
@@ -47,6 +47,24 @@
       <transition name="fade" mode="out-in">
         <component :is="selectedComponent"></component>
       </transition>
+    </div>
+    <!-- Part 4 => Transition-Group -->
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+      <hr />
+      <button class="btn btn-primary" @click="addItem">Add Item</button>
+      <br />
+      <br />
+      <ul class="list-group">
+        <transition-group name="slide">
+          <li
+            class="list-group-item"
+            v-for="(number, idx) in numbers"
+            :key="number"
+            @click="removeItem(idx)"
+            :style="'cursor : pointer'"
+          >{{number}}</li>
+        </transition-group>
+      </ul>
     </div>
   </div>
 </template>
@@ -61,7 +79,9 @@ export default {
       show: true,
       alertAnimation: "fade",
       // Part3. Dynam. comp
-      selectedComponent: "DangerAlert"
+      selectedComponent: "DangerAlert",
+      // Part4. Transition-group
+      numbers: [1, 2, 3, 4, 5]
     };
   },
   components: {
@@ -69,6 +89,16 @@ export default {
     // Part3. Dynam. comp
     DangerAlert,
     SuccessAlert
+  },
+  methods: {
+    //Part4. Transition-group
+    addItem() {
+      const pos = Math.floor(Math.random() * this.numbers.length);
+      this.numbers.splice(pos, 0, this.numbers.length + 1);
+    },
+    removeItem(idx) {
+      this.numbers.splice(idx, 1);
+    }
   }
 };
 </script>
@@ -103,6 +133,12 @@ export default {
   animation: slide-out 1s ease-out forwards;
   transition: opacity 3s;
   opacity: 0;
+  /* debug transition-group on item removal */
+  position: absolute;
+}
+/* PART 4. transition-Group GIVE US ACCESS TO A NEW CSS CLASS WHICH ATTACHS TO ALL ELEMENT THAT NEED TO CHANGE PLACE*/
+.slide-move {
+  transition: transform 1s;
 }
 @keyframes slide-in {
   from {

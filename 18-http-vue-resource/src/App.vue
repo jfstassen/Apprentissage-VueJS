@@ -40,7 +40,7 @@ export default {
   methods: {
     submit() {
       this.$http
-        .post(process.env.VUE_APP_ROOT_URL, this.user)
+        .post("", this.user) // va chercher Vue.http.options.root dans main.js
         .then(
           res => {
             console.log(res);
@@ -53,7 +53,7 @@ export default {
     getData() {
       // for some reasons we can skip the second .then by looping on res.data ????
       this.$http
-        .get(process.env.VUE_APP_ROOT_URL)
+        .get("") // va chercher Vue.http.options.root dans main.js
         .then(res => {
           return res.json();
         })

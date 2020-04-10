@@ -18,3 +18,4 @@
 15. Animations & transitions in 4 parts
 16. Exercice on animations with A quizz (copy pasta)
 17. Monster Slayer With Animations (copy pasta)
+18. Accessing Http via Vue-resource (legacy package!! Use Axios as alternative)

@@ -36,20 +36,39 @@
       </div>
     </div>
     <SecondPart></SecondPart>
+    <!-- Animation on dynamic components: -->
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+      <hr />
+      <button
+        class="btn btn-primary"
+        @click="selectedComponent == 'SuccessAlert' ? selectedComponent = 'DangerAlert' : selectedComponent = 'SuccessAlert'"
+      >Toggle Components</button>
+      <br />
+      <transition name="fade" mode="out-in">
+        <component :is="selectedComponent"></component>
+      </transition>
+    </div>
   </div>
 </template>
 
 <script>
-import SecondPart from './SecondPart.vue';
+import SecondPart from "./SecondPart.vue";
+import DangerAlert from "./DangerAlert.vue";
+import SuccessAlert from "./SuccessAlert.vue";
 export default {
   data() {
     return {
       show: true,
-      alertAnimation: "fade"
+      alertAnimation: "fade",
+      // Part3. Dynam. comp
+      selectedComponent: "DangerAlert"
     };
   },
-  components:{
-    SecondPart
+  components: {
+    SecondPart,
+    // Part3. Dynam. comp
+    DangerAlert,
+    SuccessAlert
   }
 };
 </script>
@@ -62,7 +81,7 @@ export default {
 .fade-enter-active {
   transition: opacity 1s;
 }
-.fade-leave { 
+.fade-leave {
   /* opacity: 1; */
 }
 .fade-leave-active {
@@ -71,7 +90,7 @@ export default {
 }
 
 /* Animations */
-.slide-enter { 
+.slide-enter {
   opacity: 0;
 }
 .slide-enter-active {

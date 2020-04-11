@@ -9,7 +9,18 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
   routes,
-  mode: "history"
+  mode: "history",
+  scrollBehavior(to, from, savedPosition){
+    console.log(from) //annoying eslint
+    if(savedPosition){ // retourne a la position precedente
+      return savedPosition;
+    }
+    if(to.hash){
+      return {selector: to.hash} //scroll down to hash si la valeur existe
+    }
+    return {x: 0, y: 0};  // sinon return top
+    
+  }
 });
 
 new Vue({

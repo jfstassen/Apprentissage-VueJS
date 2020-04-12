@@ -21,3 +21,4 @@
 18. Accessing Http via Vue-resource (legacy package!! Use Axios as alternative)
 19. Routing with Vue-Router
 20. VueX !
+21. VueX - Follow-up from 20. Introducing Actions, payload etc

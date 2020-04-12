@@ -7,6 +7,10 @@
         <another-result></another-result>
         <hr />
         <app-counter ></app-counter>
+        <hr>
+        <p>using mutation: $store.commit('function name')</p>
+        <!--  lesson 269 -->
+        <another-counter></another-counter>
       </div>
     </div>
   </div>
@@ -14,6 +18,8 @@
 
 <script>
 import Counter from "./components/Counter.vue";
+// lesson 269
+import AnotherCounter from "./components/AnotherCounter.vue";
 import Result from "./components/Result.vue";
 import AnotherResult from "./components/AnotherResult.vue";
 
@@ -21,7 +27,9 @@ export default {
   components: {
     appCounter: Counter,
     appResult: Result,
-    AnotherResult
+    AnotherResult,
+    // lesson 269
+    AnotherCounter
   }
 };
 </script>

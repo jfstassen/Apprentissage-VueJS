@@ -18,5 +18,14 @@ export const store = new Vuex.Store({
     stringCounter: state => {
       return state.counter + " clicks";
     }
+  },
+  // lesson 269: using mutations to change our state (une sorte de setters)
+  mutations: {
+    incrementMU: state => {
+      state.counter++;
+    },
+    decrementMU: state => {
+      state.counter--;
+    }
   }
 });

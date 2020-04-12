@@ -1,7 +1,7 @@
-import * as types from './types';
+import * as types from "./types";
 
 export default {
-    [types.VALUE]: state => {
-        return state.value;
-    }
+  [types.VALUE]: state => {
+    return state.value;
+  }
 };

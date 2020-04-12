@@ -21,6 +21,7 @@ export const store = new Vuex.Store({
   },
   // lesson 269: using mutations to change our state (une sorte de setters)
   mutations: {
+    // 🔎 MUTATIONS MUST ALWAYS BE SYNCHRONOYUS
     incrementMU: state => {
       state.counter++;
     },

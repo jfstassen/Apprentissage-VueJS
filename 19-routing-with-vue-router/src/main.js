@@ -22,6 +22,13 @@ const router = new VueRouter({
     
   }
 });
+//gets invoked on each routing action
+router.beforeEach((to, from, next) => {
+  console.log(to, from, next); //annoying eslint
+  console.log('global beforeEach')
+  next(); //autorise la vue
+  // next(false) // interdit l'acces
+})
 
 new Vue({
   render: h => h(App),

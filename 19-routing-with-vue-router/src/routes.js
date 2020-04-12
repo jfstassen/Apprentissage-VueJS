@@ -26,10 +26,17 @@ export const routes = [
     components: { default: User, "header-bottom": Header },
     children: [
       { path: "", component: UserStart },
-      { path: ":id", component: UserDetail },
+      {
+        path: ":id",
+        component: UserDetail,
+        beforeEnter: (to, from, next) => {
+          console.log(to, from, next); //annoying eslint
+          next(); // check on route lvl
+        }
+      },
       { path: ":id/edit", component: UserEdit, name: "userEdit" }
     ] //exemple.com/user/id
-  }, 
-  {path : '/redirect-me', redirect: "/"},
-  {path : '*', redirect: "/"}
+  },
+  { path: "/redirect-me", redirect: "/" },
+  { path: "*", redirect: "/" }
 ];

@@ -17,9 +17,18 @@ export default {
         name: "userEdit",
         params: { id: this.$route.params.id },
         query: { locale: "en", q: 100 },
-        hash: '#data'
+        hash: "#data"
       }
     };
+  },
+  beforeEnter(to, from, next) {
+    console.log(to, from, next); //annoying eslint
+    console.log(this.link); // won't work because it locks it if no next()
+    // if () {
+    next(); // check for auth
+    // }else{
+    // next(false)
+    // }
   }
 };
 </script>

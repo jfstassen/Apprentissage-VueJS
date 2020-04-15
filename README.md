@@ -22,3 +22,4 @@
 19. Routing with Vue-Router
 20. VueX !
 21. VueX - Follow-up from 20. Introducing Actions, payload etc
+22. Axios in VueJS  // Sign up, (auto)Sign in, Dashboard, (auto)Logout, Firebase DB + Auth

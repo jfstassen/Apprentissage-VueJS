@@ -2,13 +2,16 @@
   <div id="signup">
     <div class="signup-form">
       <form @submit.prevent="onSubmit">
-        <div class="input">
+        <div class="input" :class="{invalid: $v.email.$error}">
           <label for="email">Mail</label>
-          <input type="email" id="email" v-model="email" />
+          <input type="email" id="email" @blur="$v.email.$touch()" v-model="email" />
+          <p v-if="!$v.email.email">Please provide a valid email address</p>
+          <p v-if="!$v.email.required">Field must not be empty (required validor not true)</p>
         </div>
-        <div class="input">
+        <div class="input" :class="{invalid: $v.age.$error}">
           <label for="age">Your Age</label>
-          <input type="number" id="age" v-model.number="age" />
+          <input type="number" id="age" @blur="$v.age.$touch()" v-model.number="age" />
+          <p v-if="!$v.age.minVal">You have to be at least {{$v.age.$params.minVal.min}} years old</p>
         </div>
         <div class="input">
           <label for="password">Password</label>
@@ -51,6 +54,7 @@
 </template>
 
 <script>
+import { required, email, numeric, minValue } from "vuelidate/lib/validators";
 export default {
   data() {
     return {
@@ -62,6 +66,18 @@ export default {
       hobbyInputs: [],
       terms: false
     };
+  },
+  //VUELIDATE
+  validations: {
+    email: {
+      required,
+      email
+    },
+    age: {
+      required,
+      numeric,
+      minVal: minValue(18)
+    }
   },
   methods: {
     onAddHobby() {
@@ -85,7 +101,7 @@ export default {
         terms: this.terms
       };
       console.log(formData);
-      this.$store.dispatch("signup", formData)
+      this.$store.dispatch("signup", formData);
     }
   }
 };
@@ -176,5 +192,12 @@ export default {
   background-color: transparent;
   color: #ccc;
   cursor: not-allowed;
+}
+.input.invalid input {
+  border: 1px solid red;
+  background-color: tomato;
+}
+.input.invalid label {
+  color: red;
 }
 </style>

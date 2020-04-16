@@ -23,3 +23,15 @@ const routes = [
 ];
 
 export default new VueRouter({ mode: "history", routes });
+//alternative easyloading syntax
+// const User = () => import('./components/user/User.vue');
+// ...
+// export const routes = [
+//     ...,
+//     {
+//         path: '/user', components: {
+//             default: User,
+//             ...
+//         }
+//     }
+// ];

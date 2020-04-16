@@ -9,7 +9,7 @@ import Vuelidate from "vuelidate";
 Vue.use(Vuelidate);
 
 // something.firebaseio.com
-axios.defaults.baseURL = "";
+axios.defaults.baseURL = process.env.VUE_APP_URL;
 //global config -> F12 networks -> users.js
 // axios.defaults.headers.common["Authorization"] = "dzad"; //Auth peut etre changer en n'importe quoi
 axios.defaults.headers.get["Accepts"] = "application/json";

@@ -5,7 +5,8 @@ import globalAxios from "axios";
 import router from "./router"; // need router to logout
 
 Vue.use(Vuex);
-const apikey=""
+const apikey=process.env.VUE_APP_API
+
 export default new Vuex.Store({
   state: {
     idToken: null,

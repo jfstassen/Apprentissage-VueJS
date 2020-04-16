@@ -13,13 +13,18 @@
           <input type="number" id="age" @blur="$v.age.$touch()" v-model.number="age" />
           <p v-if="!$v.age.minVal">You have to be at least {{$v.age.$params.minVal.min}} years old</p>
         </div>
-        <div class="input">
+        <div class="input" :class="{invalid: $v.password.$error}">
           <label for="password">Password</label>
-          <input type="password" id="password" v-model="password" />
+          <input type="password" id="password" @blur="$v.password.$touch()" v-model="password" />
         </div>
-        <div class="input">
+        <div class="input" :class="{invalid: $v.confirmPassword.$error}">
           <label for="confirm-password">Confirm Password</label>
-          <input type="password" id="confirm-password" v-model="confirmPassword" />
+          <input
+            type="password"
+            id="confirm-password"
+            @blur="$v.confirmPassword.$touch()"
+            v-model="confirmPassword"
+          />
         </div>
         <div class="input">
           <label for="country">Country</label>
@@ -34,19 +39,33 @@
           <h3>Add some Hobbies</h3>
           <button @click="onAddHobby" type="button">Add Hobby</button>
           <div class="hobby-list">
-            <div class="input" v-for="(hobbyInput, index) in hobbyInputs" :key="hobbyInput.id">
+            <div
+              class="input"
+              v-for="(hobbyInput, index) in hobbyInputs"
+              :class="{invalid: $v.hobbyInputs.$each[index].$error}"
+              :key="hobbyInput.id"
+            >
               <label :for="hobbyInput.id">Hobby #{{ index }}</label>
-              <input type="text" :id="hobbyInput.id" v-model="hobbyInput.value" />
+              <input
+                type="text"
+                :id="hobbyInput.id"
+                @blur="$v.hobbyInputs.$each[index].value.$touch()"
+                v-model="hobbyInput.value"
+              />
               <button @click="onDeleteHobby(hobbyInput.id)" type="button">X</button>
             </div>
+            <p
+              v-if="!$v.hobbyInputs.minLen"
+            >You have to specify at least {{$v.hobbyInputs.$params.minLen.min}} hobbies</p>
+            <p v-if="!$v.hobbyInputs.required">Please add hobbies</p>
           </div>
         </div>
-        <div class="input inline">
-          <input type="checkbox" id="terms" v-model="terms" />
+        <div class="input inline" :class="{invalid: $v.terms.$error}">
+          <input type="checkbox" id="terms" v-model="terms" @change="$v.terms.$touch()" />
           <label for="terms">Accept Terms of Use</label>
         </div>
         <div class="submit">
-          <button type="submit">Submit</button>
+          <button type="submit" :disabled="$v.$invalid">Submit</button>
         </div>
       </form>
     </div>
@@ -54,7 +73,15 @@
 </template>
 
 <script>
-import { required, email, numeric, minValue } from "vuelidate/lib/validators";
+import {
+  required,
+  email,
+  numeric,
+  minValue,
+  minLength,
+  sameAs
+} from "vuelidate/lib/validators";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -71,12 +98,61 @@ export default {
   validations: {
     email: {
       required,
-      email
+      email,
+      /////// custom validator:
+      // unique: val => {
+      //   return val !== "test@test.com"
+      // }
+      ///////  Promise !
+      // unique: val => {
+      //   if (val === "") return true; //return true if empty to avoid hitting server & trust the other validators
+      //   return new Promise((resolve, reject) => {
+      //     setTimeout(() => {
+      //       resolve(val !== "test@test.com");
+      //     }, 1000);
+      //   });
+      // }
+      /////// CHECK BACKEND IF EMAIL TAKEN WITH AXIOS AND FIREBASE
+      unique: val => {
+        if (val === "") return true; //return true if empty to avoid hitting server & trust the other validators
+        return axios
+          .get('/users.json?orderBy="email"&equalTo="' + val.toLowerCase() + '"')
+          .then(res => {
+            // email is not taken if empty object
+            return Object.keys(res.data).length === 0;
+          });
+      }
     },
     age: {
       required,
       numeric,
       minVal: minValue(18)
+    },
+    password: {
+      required,
+      minLen: minLength(6)
+    },
+    confirmPassword: {
+      // sameAs: sameAs("password")
+      sameAs: sameAs(vm => {
+        return vm.password;
+      })
+    },
+    terms: {
+      sameAs: sameAs(vm => {
+        if (vm.country == "germany") return vm.terms;
+        return true;
+      })
+    },
+    hobbyInputs: {
+      required,
+      minLen: minLength(2),
+      $each: {
+        value: {
+          required,
+          minLen: minLength(5)
+        }
+      }
     }
   },
   methods: {

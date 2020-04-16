@@ -8,7 +8,8 @@ import store from "./store";
 import Vuelidate from "vuelidate";
 Vue.use(Vuelidate);
 
-axios.defaults.baseURL = "https://vuejs-10-04-2020.firebaseio.com";
+// something.firebaseio.com
+axios.defaults.baseURL = "";
 //global config -> F12 networks -> users.js
 // axios.defaults.headers.common["Authorization"] = "dzad"; //Auth peut etre changer en n'importe quoi
 axios.defaults.headers.get["Accepts"] = "application/json";

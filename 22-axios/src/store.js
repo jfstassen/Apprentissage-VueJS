@@ -5,7 +5,7 @@ import globalAxios from "axios";
 import router from "./router"; // need router to logout
 
 Vue.use(Vuex);
-
+const apikey=""
 export default new Vuex.Store({
   state: {
     idToken: null,
@@ -36,7 +36,7 @@ export default new Vuex.Store({
     signup({ commit, dispatch }, authData) {
       axios
         .post(
-          "/accounts:signUp?key=",
+          `/accounts:signUp?key=${apikey}`,
           {
             email: authData.email,
             password: authData.password,
@@ -69,7 +69,7 @@ export default new Vuex.Store({
     signin({ commit, dispatch }, authData) {
       axios
         .post(
-          "/accounts:signInWithPassword?key=",
+          `/accounts:signInWithPassword?key=${apikey}`,
           {
             email: authData.email,
             password: authData.password,

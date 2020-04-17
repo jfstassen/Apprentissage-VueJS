@@ -1,12 +1,14 @@
 ## Lexique
 
 Laracasts:
+
 0.  Les bases
 1.  Les composants (Text box avec bulma)
 2.  Les composants (Modal avec bulma)
 3.  Les composants (Tabs avec bulma)
 
 Bootcamp on VueJS:
+
 4.  Monster Slayer
 5.  Life Cycles
 6.  First CLI app
@@ -28,4 +30,5 @@ Bootcamp on VueJS:
 22. Axios in VueJS  // Sign up, (auto)Sign in, Dashboard, (auto)Logout, Firebase DB + Auth
 
 VueMastery:
+
 23. Vuetify !

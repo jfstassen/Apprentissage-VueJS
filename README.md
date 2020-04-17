@@ -5,6 +5,7 @@ Laracasts:
 1.  Les composants (Text box avec bulma)
 2.  Les composants (Modal avec bulma)
 3.  Les composants (Tabs avec bulma)
+
 Bootcamp on VueJS:
 4.  Monster Slayer
 5.  Life Cycles
@@ -25,5 +26,6 @@ Bootcamp on VueJS:
 20. VueX !
 21. VueX - Follow-up from 20. Introducing Actions, payload etc
 22. Axios in VueJS  // Sign up, (auto)Sign in, Dashboard, (auto)Logout, Firebase DB + Auth
+
 VueMastery:
 23. Vuetify !

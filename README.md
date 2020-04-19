@@ -32,3 +32,4 @@ Bootcamp on VueJS:
 VueMastery:
 
 23. Vuetify !
+24. Vuetify Suite - Grid System / Responsive Design

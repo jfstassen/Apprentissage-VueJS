@@ -1,6 +1,14 @@
 <template>
   <nav>
     <v-navigation-drawer v-model="drawer" app class="primary">
+      <v-row justify="center" class="my-3">
+       <v-col cols="auto" align="center">
+          <v-avatar size="100">
+            <img src="https://api.adorable.io/avatars/100/g@adorable.png"/>
+          </v-avatar>
+          <p class="white--text subtitle my-3" >Mister Thomas</p>
+        </v-col>
+      </v-row>
       <v-list>
         <v-list-item v-for="(link, idx) in links" :key="idx" :to="link.route">
           <v-list-item-action>
@@ -32,7 +40,7 @@
 export default {
   data() {
     return {
-      drawer: false,
+      drawer: true,
       links: [
         { icon: "mdi-view-dashboard", text: "Dashboard", route: "/" },
         { icon: "mdi-folder", text: "My Projects", route: "/projects" },

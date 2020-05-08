@@ -35,4 +35,5 @@ VueMastery:
 24. Vuetify Suite - Grid System / Responsive Design
 
 YT:
+
 25. Vuetify - Todo App

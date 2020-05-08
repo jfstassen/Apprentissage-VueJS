@@ -36,4 +36,4 @@ VueMastery:
 
 YT:
 
-25. Vuetify - Todo App
+25. Vuetify - Project App with Firestore DB / $emit / CR~~UD~~ / momentjs

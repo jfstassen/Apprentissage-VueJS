@@ -9,9 +9,7 @@ import "firebase/firestore";
 import "firebase/firestore";
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "",
-  authDomain: "",
-  databaseURL: "",
+
   projectId: "todoapp-yt-ninja",
   storageBucket: "todoapp-yt-ninja.appspot.com",
   messagingSenderId: "647265305478",

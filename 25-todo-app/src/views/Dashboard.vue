@@ -27,7 +27,7 @@
         </v-col>
       </v-row>
 
-      <v-card outlined class="px-3" v-for="(project) in projects" :key="project.title">
+      <v-card outlined class="px-3" v-for="(project) in projects" :key="project.id">
         <v-row :class="`pa-3 project ${project.status}`">
           <v-col cols="12" md="6">
             <div class="caption grey--text">Project Title</div>
@@ -43,8 +43,6 @@
           </v-col>
           <v-col cols="4" sm="4" md="2" class="d-flex align-center">
             <v-chip small :class="`${project.status} white--text caption`">{{project.status}}</v-chip>
-            <!-- <div class="caption grey--text">Status</div> -->
-            <!-- <div>{{project.status}}</div> -->
           </v-col>
         </v-row>
       </v-card>
@@ -54,44 +52,45 @@
 
 <script>
 // @ is an alias to /src
+import db from "@/firebase";
 
 export default {
   components: {},
   data() {
     return {
       projects: [
-        {
-          title: "Design a new website",
-          person: "The Net Ninja",
-          due: "1st Jan 2019",
-          status: "ongoing",
-          content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!"
-        },
-        {
-          title: "Code up the homepage",
-          person: "Chun Li",
-          due: "10th Jan 2019",
-          status: "complete",
-          content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!"
-        },
-        {
-          title: "Design video thumbnails",
-          person: "Ryu",
-          due: "20th Dec 2018",
-          status: "complete",
-          content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!"
-        },
-        {
-          title: "Create a community forum",
-          person: "Gouken",
-          due: "20th Oct 2018",
-          status: "overdue",
-          content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!"
-        }
+        // {
+        //   title: "Design a new website",
+        //   person: "The Net Ninja",
+        //   due: "1st Jan 2019",
+        //   status: "ongoing",
+        //   content:
+        //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!"
+        // },
+        // {
+        //   title: "Code up the homepage",
+        //   person: "Chun Li",
+        //   due: "10th Jan 2019",
+        //   status: "complete",
+        //   content:
+        //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!"
+        // },
+        // {
+        //   title: "Design video thumbnails",
+        //   person: "Ryu",
+        //   due: "20th Dec 2018",
+        //   status: "complete",
+        //   content:
+        //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!"
+        // },
+        // {
+        //   title: "Create a community forum",
+        //   person: "Gouken",
+        //   due: "20th Oct 2018",
+        //   status: "overdue",
+        //   content:
+        //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!"
+        // }
       ]
     };
   },
@@ -99,6 +98,17 @@ export default {
     sortBy(e) {
       this.projects.sort((a, b) => (a[e] < b[e] ? -1 : 1));
     }
+  },
+  created(){
+    // https://www.youtube.com/watch?v=LTKBEMgTIDk&list=PL4cUxeGkcC9g0MQZfHwKcuB0Yswgb3gA5&index=31
+    // doc that have been changed in firestore when we received the snapshot object
+    db.collection("projects").onSnapshot(res => {
+      const changes = res.docChanges();
+      changes.map(change => {
+        change.type ==="added" && this.projects.push({...change.doc.data(),
+        id: change.doc.id})
+      })
+    })
   }
 };
 </script>

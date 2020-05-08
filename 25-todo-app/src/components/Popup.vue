@@ -9,9 +9,19 @@
           <span class="headline">User Profile</span>
         </v-card-title>
         <v-card-text>
-          <v-form class="px-3">
-            <v-text-field v-model="title" label="Title" prepend-icon="mdi-folder"></v-text-field>
-            <v-textarea v-model="content" label="Information" prepend-icon="mdi-pencil"></v-textarea>
+          <v-form class="px-3" ref="vanillaVueJsForm">
+            <v-text-field
+              v-model="title"
+              label="Title"
+              prepend-icon="mdi-folder"
+              :rules="inputRules"
+            ></v-text-field>
+            <v-textarea
+              v-model="content"
+              label="Information"
+              prepend-icon="mdi-pencil"
+              :rules="inputRules"
+            ></v-textarea>
             <v-menu
               v-model="menu"
               :close-on-content-click="false"
@@ -19,6 +29,7 @@
               offset-y
               min-width="290px"
               :nudge-right="40"
+              :rules="inputRules"
             >
               <template v-slot:activator="{ on }">
                 <v-text-field
@@ -48,12 +59,14 @@ export default {
       title: "",
       content: "",
       menu: false,
-      due: null
+      due: undefined,
+      inputRules: [v => v.length >= 3 || "Minimum length is 3 characters"]
     };
   },
   methods: {
     submit() {
-      console.log(this.title, this.content);
+      this.$refs.vanillaVueJsForm.validate() &&
+        console.log(this.title, this.content);
     }
   },
   computed: {

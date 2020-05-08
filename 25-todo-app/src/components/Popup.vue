@@ -12,6 +12,26 @@
           <v-form class="px-3">
             <v-text-field v-model="title" label="Title" prepend-icon="mdi-folder"></v-text-field>
             <v-textarea v-model="content" label="Information" prepend-icon="mdi-pencil"></v-textarea>
+            <v-menu
+              v-model="menu"
+              :close-on-content-click="false"
+              transition="scale-transition"
+              offset-y
+              min-width="290px"
+              :nudge-right="40"
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  v-model="formattedDate"
+                  label="Due date"
+                  prepend-icon="mdi-calendar"
+                  readonly
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker v-model="due" @input="menu = false"></v-date-picker>
+            </v-menu>
+            <v-spacer></v-spacer>
             <v-btn text class="success mx-0 mt-3" @click="submit">Add Project</v-btn>
           </v-form>
         </v-card-text>
@@ -21,20 +41,27 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
-  data(){
+  data() {
     return {
-      title:"",
-      content:""
+      title: "",
+      content: "",
+      menu: false,
+      due: null
+    };
+  },
+  methods: {
+    submit() {
+      console.log(this.title, this.content);
     }
   },
-  methods:{
-    submit(){
-      console.log(this.title, this.content)
+  computed: {
+    formattedDate() {
+      return this.due && moment(this.due).format("Do MMMM YYYY");
     }
   }
-    
-  }
+};
 </script>
 
 <style>

@@ -53,6 +53,7 @@
 
 <script>
 import moment from "moment";
+import db from "@/firebase"
 export default {
   data() {
     return {
@@ -66,7 +67,8 @@ export default {
   methods: {
     submit() {
       this.$refs.vanillaVueJsForm.validate() &&
-        console.log(this.title, this.content);
+        // console.log(this.title, this.content);
+console.log(db)
     }
   },
   computed: {

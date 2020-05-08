@@ -87,6 +87,8 @@ export default {
           .then(() => {
             this.loading = false;
             this.dialog = false;
+            // for snackbar
+            this.$emit("projectAdded", this.dialog);
           });
           // https://www.youtube.com/watch?v=FPJQg4phEPo&list=PL4cUxeGkcC9g0MQZfHwKcuB0Yswgb3gA5&index=29
       }

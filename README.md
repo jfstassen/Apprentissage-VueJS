@@ -32,7 +32,7 @@ Bootcamp on VueJS:
 VueMastery:
 
 23. Vuetify !
-24. Vuetify Suite - Grid System / Responsive Design
+24. Vuetify Suite - Grid System / Responsive Design / Theme / Directives / Validation / Custom Dark Mode Button
 
 YT:
 

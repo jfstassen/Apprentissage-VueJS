@@ -33,6 +33,7 @@ VueMastery:
 
 23. Vuetify !
 24. Vuetify Suite - Grid System / Responsive Design / Theme / Directives / Validation / Custom Dark Mode Button
+26. Real World Vue.js Lesson
 
 YT:
 

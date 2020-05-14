@@ -1,28 +1,17 @@
 <template>
-  <router-link class="event-link" :to="{name: 'event-show', params: {id: '1'}}">
+  <router-link class="event-link" :to="{ name: 'event-show', params: { id: event.id } }">
     <div class="event-card -shadow">
-      <span class="eyebrow">@{{event.time}} on {{event.date}}</span>
-      <h4 class="title">{{event.title}}</h4>
-      <span>{{event.attendees.length}} attending</span>
+      <span class="eyebrow">@{{ event.time }} on {{ event.date }}</span>
+      <h4 class="title">{{ event.title }}</h4>
+      <BaseIcon name="users">{{ event.attendees.length }} attending</BaseIcon>
     </div>
   </router-link>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      event: {
-        id: 1,
-        title: 'Park Cleanup',
-        date: 'Tues',
-        time: '6.00',
-        attendees: [
-          { id: 'abc123', name: 'Adam Jahr' },
-          { id: 'dzdc123', name: 'John Das' }
-        ]
-      }
-    }
+  props: {
+    event: Object
   }
 }
 </script>
@@ -41,7 +30,6 @@ export default {
 .event-card > .title {
   margin: 0;
 }
-
 .event-link {
   color: black;
   text-decoration: none;

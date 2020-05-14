@@ -1,4 +1,4 @@
 module.exports = {
-  singleQuote: true, //convert double quote to single
+  singleQuote: true,
   semi: false
 }

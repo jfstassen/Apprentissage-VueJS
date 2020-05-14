@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-<NavBar />
-    <router-view />
+    <NavBar/>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue';
+import NavBar from '@/components/NavBar.vue'
+
 export default {
   components: {
-    NavBar,
-  },
+    NavBar
+  }
 }
 </script>
 
@@ -238,5 +239,4 @@ select:focus::ms-value {
 select::ms-expand {
   opacity: 0;
 }
-
 </style>
